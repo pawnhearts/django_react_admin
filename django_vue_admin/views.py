@@ -109,16 +109,6 @@ for model, model_admin in admin.site._registry.items():
         )
     )
 
-def get_models(app_label):
-    models = [m for m in admin.site._registry.keys() if m._meta.app_label == app_label]
-    res = [{k: getattr(m._meta, k for k in ['app_label', 'model_name', 'verbose_name', 'verbose_name_plural']} for m in models]
-    def get(self, request):
-        return Response(res)
-    return get
-
-for app_label in set(m._meta.app_label for m in admin.site._registry.keys()):
-    view = type(app_label.title(), (views.APIView,), {'get': get_models(app_label)})
-    urlpatterns.append(path(f'{{app_label}}/', view.as_view()))
 
 class Index(views.APIView):
     def get(self, request):
@@ -129,6 +119,7 @@ class Index(views.APIView):
                 for k in ['app_url', 'admin_url']:
                     m[k] = m[k].replace(reverse('admin:index'), reverse('vue_admin_index'))
         return Response(res)
+
 
 urlpatterns.append(path('', Index.as_view(), name='vue_admin_index'))
 
