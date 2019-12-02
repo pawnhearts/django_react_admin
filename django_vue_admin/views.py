@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.http import HttpRequest
 from django.urls import path
 from django.views.generic import TemplateView
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from django_filters.rest_framework.backends import DjangoFilterBackend
 from rest_framework.decorators import action, MethodMapper
 from rest_framework.filters import OrderingFilter
@@ -61,6 +61,7 @@ for model, model_admin in admin.site._registry.items():
         "list_display": list(model_admin.get_list_display(r)),
         "ordering_fields": list(model_admin.get_sortable_by(r)),
         "filterset_fields": list(model_admin.get_list_filter(r)),
+        "permission_classes": [permissions.IsAdminUser, permissions.DjangoModelPermissions],
     }
     viewset = type(f"{model.__name__}ViewSet", (viewsets.ModelViewSet,), params)
     router.register(
