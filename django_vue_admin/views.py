@@ -1,9 +1,9 @@
 from django.conf.urls import url
 from django.contrib import admin
 from django.http import HttpRequest
-from django.urls import path
+from django.urls import path, reverse
 from django.views.generic import TemplateView
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, views
 from django_filters.rest_framework.backends import DjangoFilterBackend
 from rest_framework.decorators import action, MethodMapper
 from rest_framework.filters import OrderingFilter
@@ -30,7 +30,6 @@ r = Request(HttpRequest())
 r.user = get_user_model()(is_superuser=True)
 
 for model, model_admin in admin.site._registry.items():
-
 
     def get_info(model_admin):
         def info(*args):
@@ -109,4 +108,28 @@ for model, model_admin in admin.site._registry.items():
             ),
         )
     )
+
+def get_models(app_label):
+    models = [m for m in admin.site._registry.keys() if m._meta.app_label == app_label]
+    res = [{k: getattr(m._meta, k for k in ['app_label', 'model_name', 'verbose_name', 'verbose_name_plural']} for m in models]
+    def get(self, request):
+        return Response(res)
+    return get
+
+for app_label in set(m._meta.app_label for m in admin.site._registry.keys()):
+    view = type(app_label.title(), (views.APIView,), {'get': get_models(app_label)})
+    urlpatterns.append(path(f'{{app_label}}/', view.as_view()))
+
+class Index(views.APIView):
+    def get(self, request):
+        res = admin.site.get_app_list(request)
+        for app in res:
+            app['app_url'] = app['app_url'].replace(reverse('admin:index'), reverse('vue_admin_index'))
+            for m in app['models']:
+                for k in ['app_url', 'admin_url']:
+                    m[k] = m[k].replace(reverse('admin:index'), reverse('vue_admin_index'))
+        return Response(res)
+
+urlpatterns.append(path('', Index.as_view(), name='vue_admin_index'))
+
 urlpatterns += router.urls
