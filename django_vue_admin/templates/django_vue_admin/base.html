@@ -1,0 +1,25 @@
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+</head>
+<body>
+<div id="main">
+  {% block main %}
+  {% endblock %}
+</div>
+<script language="JavaScript">
+        function init() {
+            Vue.use(VueResource);
+            new Vue({
+                el: '#main',
+                delimiters: ['[[', ']]'],
+                // define data - initial display text
+                {% block script %}
+                {% endblock %}
+            });
+        }
+    document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
