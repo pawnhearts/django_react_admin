@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django_react_admin"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["ph <robotnaoborot@gmail.com>"]
 homepage = "https://github.com/pawnhearts/django_react_admin"
@@ -8,8 +8,8 @@ homepage = "https://github.com/pawnhearts/django_react_admin"
 [tool.poetry.dependencies]
 python = "^3.8"
 djangorestframework = "^3.10"
-django_filters = "^0.2.1"
 django = "^2.2"
+django-filter = "^2.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"

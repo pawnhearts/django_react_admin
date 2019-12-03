@@ -23,6 +23,6 @@ setup(
     packages=['django_react_admin', 'django_react_admin.management', 'django_react_admin.migrations'],
     package_dir={"": "."},
     package_data={"django_react_admin": ["src/*.js", "src/*.json", "src/*.lock", "src/*.md", "src/public/*.html", "src/public/*.ico", "src/public/*.json", "src/public/*.png", "src/public/*.txt", "src/src/*.css", "src/src/*.js", "src/src/*.svg", "static/django_react_admin/*.html", "static/django_react_admin/*.ico", "static/django_react_admin/*.js", "static/django_react_admin/*.json", "static/django_react_admin/*.png", "static/django_react_admin/*.txt", "static/django_react_admin/static/css/*.css", "static/django_react_admin/static/css/*.map", "static/django_react_admin/static/js/*.js", "static/django_react_admin/static/js/*.map"]},
-    install_requires=['django==2.*,>=2.2.0', 'django-filters==0.*,>=0.2.1', 'djangorestframework==3.*,>=3.10.0'],
+    install_requires=['django==2.*,>=2.2.0', 'django-filter==2.*,>=2.2.0', 'djangorestframework==3.*,>=3.10.0'],
     extras_require={"dev": ["pytest==3.*,>=3.0.0"]},
 )
