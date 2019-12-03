@@ -1,4 +1,4 @@
-from django_vue_admin import __version__
+from django_react_admin import __version__
 
 
 def test_version():

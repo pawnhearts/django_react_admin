@@ -1,0 +1,47 @@
+{% extends "django_react_admin/base.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}">{% endblock %}
+
+
+{% block main %}
+<div id="content-main">
+
+    <div :class="module" v-for="app in app_list" v-key="app_label">
+        <table>
+            <caption>
+                <a :href="app.app_url" class="section">[[ app.name ]]</a>
+            </caption>
+            <tr :class="model.object_name.toLowerCase()" v-for="model in app.models" v-key="model.name">
+                <th scope="row"><a :href="model.admin_url">[[ model.name ]]</a></th>
+
+                <td><a :href="model.add_url" class="addlink">Add</a></td>
+                {% else %}
+                <td>&nbsp;</td>
+                {% endif %}
+
+                <td><a :href="model.admin_url" class="changelink">Change</a></td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+<script>
+
+    {% block script %}
+    data: function() { return {
+        app_list: [],
+    }; },
+    mounted() {
+        this.fetchInfo();
+    },
+    methods: {
+        fetchInfo: function () {
+            this.$http.get('{{ path }}').then((r) => {
+                this.app_list = r.body;
+            })
+        }
+    {% endblock %}
+</script>
