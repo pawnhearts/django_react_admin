@@ -1,5 +1,3 @@
-import subprocess, os, sys
-
 from django.core.management.base import BaseCommand
 from django.core import management
 from subprocess import Popen, PIPE
