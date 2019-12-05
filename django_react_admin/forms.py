@@ -180,6 +180,9 @@ export default {{
         yield f"""create() {{
         this.$http.post('{list_url}', {{...this.form}}).then(r => r.json()).then(r => {{this.form = r;}});
         }},"""
+        yield f"""list(filters) {{
+        this.$http.get('{list_url}', filters).then(r => r.json()).then(r => {{this.results = r.results;}});
+        }},"""
     yield f"""
   }}
     }};

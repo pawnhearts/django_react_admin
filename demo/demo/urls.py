@@ -17,8 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 from django_react_admin import urls
 from django.conf.urls.static import static
+from rest_framework.routers import DefaultRouter
+from app.views import *
+
+router = DefaultRouter()
+router.register('books', BookViewSet, 'books')
+router.register('authors', AuthorViewSet)
+router.register('publishers', PublisherViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('react_admin/', include(urls.urlpatterns)),
-]
+] + router.urls
