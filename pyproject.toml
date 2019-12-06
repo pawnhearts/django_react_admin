@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "django_react_admin"
 version = "0.1.1"
-description = ""
+description = "Creates viewsets and serializers for models in your admin site to use with react-admin"
 authors = ["ph <robotnaoborot@gmail.com>"]
 homepage = "https://github.com/pawnhearts/django_react_admin"
 
