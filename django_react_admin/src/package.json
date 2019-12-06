@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && (rm -rf ../static/django_react_admin || true) && sed 's/href=\\//href=\\/static\\//g' build/index.html > ../templates/django_react_admin/index.html  && mv build/ ../static/django_react_admin",
+    "build": "react-scripts build && (rm -rf ../static/django_react_admin || true) && sed 's/=\\//=\\/static\\//g' build/index.html > ../templates/django_react_admin/index.html  && mv build/ ../static/django_react_admin",
 
     "test": "react-scripts test",
     "eject": "react-scripts eject"
