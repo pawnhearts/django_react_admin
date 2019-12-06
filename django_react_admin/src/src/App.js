@@ -17,6 +17,7 @@ class App extends Component {
   }
   componentDidMount() {
     fetch(apiUrl+'/').then(response => response.json()).then(response => {
+      if(!response.reduce) response = Object.keys(response);
           let res = response.reduce((a, cur) => {
             let b=cur.models.map((m) => {return m.admin_url.replace(/\/$/, "");});
             return [...a, ...b];
