@@ -123,12 +123,13 @@ def _vue_form_generator(viewset):
         <button type="submit" class="button">
           Submit
         </button>
+        </div>
       </div>
     </form>
   </div>
   </template>
     <script>
-    import validators from "vuelidate/lib/validators";
+    import {{required, numeric, maxLength, url}} from "vuelidate/lib/validators";
 
 export default {{
   name: "{component_name}",
@@ -153,9 +154,9 @@ export default {{
     for name, field in serializer().fields.items():
         style = default_style[field]
         validators = [v for v in [
-            field.required and 'validators.required',
-            style.get('input_type', None) in ('number', 'url', 'email') and f"validators.{style['input_type'].replace('number', 'numeric')}",
-            *[getattr(field, f'{k}_{f}', None) and f"{k}: validators.{k}{f.title()}({getattr(field, f'{k}_{f}', None)})" for k in ['min', 'max'] for f in ['length','value']]
+            field.required and 'required',
+            style.get('input_type', None) in ('number', 'url', 'email') and f"{style['input_type'].replace('number', 'numeric')}",
+            *[getattr(field, f'{k}_{f}', None) and f"{k}: {k}{f.title()}({getattr(field, f'{k}_{f}', None)})" for k in ['min', 'max'] for f in ['length','value']]
         ] if v]
         if validators:
             yield f"""{name}: {{{', '.join(validators)}}},"""
@@ -194,4 +195,3 @@ export default {{
 
 def generate_vue_form(viewset):
     return '\n'.join(_vue_form_generator(viewset))
-
