@@ -27,7 +27,7 @@ setup(
     package_dir={"": "."},
     package_data={"django_react_admin": ["src/*.js", "src/*.json", "src/*.lock", "src/*.md", "src/public/*.html", "src/public/*.ico", "src/public/*.json",
                                          "src/public/*.png", "src/public/*.txt", "src/src/*.css", "src/src/*.js", "src/src/*.svg", "templates/django_react_admin/*.html"]},
-    install_requires=['django==2.*,>=2.2.0',
+    install_requires=['django==3.*,>=3.0.0',
                       'django-filter==2.*,>=2.2.0', 'djangorestframework==3.*,>=3.10.0'],
     extras_require={"dev": ["pytest==3.*,>=3.0.0"]},
 )

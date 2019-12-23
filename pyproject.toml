@@ -8,7 +8,7 @@ homepage = "https://github.com/pawnhearts/django_react_admin"
 [tool.poetry.dependencies]
 python = "^3.8"
 djangorestframework = "^3.10"
-django = "^2.2"
+django = "^3.0"
 django-filter = "^2.2"
 
 [tool.poetry.dev-dependencies]
