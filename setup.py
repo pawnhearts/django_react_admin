@@ -23,7 +23,7 @@ setup(
     author='ph',
     author_email='robotnaoborot@gmail.com',
     packages=['django_react_admin', 'django_react_admin.management',
-              'django_react_admin.management.commands', 'django_react_admin.migrations'],
+              'django_react_admin.management.commands', 'django_react_admin.migrations', 'django_react_admin.static'],
     package_dir={"": "."},
     package_data={"django_react_admin": ["src/*.js", "src/*.json", "src/*.lock", "src/*.md", "src/public/*.html", "src/public/*.ico", "src/public/*.json",
                                          "src/public/*.png", "src/public/*.txt", "src/src/*.css", "src/src/*.js", "src/src/*.svg", "templates/django_react_admin/*.html"]},
